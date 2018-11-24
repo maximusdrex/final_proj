@@ -6,6 +6,10 @@ function json_response($output) {
     echo json_encode(array("posts" => $output));
 }
 
-json_response(select_query("*", "mschaefer_posts"));
+
+if($_SERVER["REQUEST_METHOD"] == "GET") {
+    $user_id = $_REQUEST["uid"];
+    json_response(select_posts_user($user_id));
+}
 
 ?>

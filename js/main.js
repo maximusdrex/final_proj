@@ -20,7 +20,9 @@ Vue.component('post-item', {
         <div class="card-content">
             <div class="media">
                 <div class="media-content">
-                    <p class="title">{{ title }}</p>
+                    <a v-bind:href="article_src">
+                        <p class="title">{{ title }}</p>
+                    </a>
                 </div>
             </div>
             <div v-bind:class="text_class">
@@ -34,13 +36,22 @@ Vue.component('post-item', {
 var app = new Vue({
     el: '#app',
     data: {
-        message: 'Hello Vue!',
         seen: true,
         posts: null,
+        projects: null,
+        username: null,
+        userid: null,
     },
     mounted() {
         axios
-            .get('http://localhost/final_proj/api/items/posts.php')
+            .get('http://localhost/final_proj/api/items/posts.php', {
+                params: {
+                    uid: this.userid
+                }
+            })
             .then(response => (this.posts = response.data.posts))
+        axios
+            .get('http://localhost/final_proj/api/items/projects.php')
+            .then(response => (this.projects = response.data.projects))
     },
   })

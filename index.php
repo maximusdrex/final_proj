@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Page Title</title>
+    <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css" />
@@ -13,27 +13,50 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <div id="app" v-if="seen">
-        <!--<div v-bind:class="css_class">
-            <img v-bind:src="img_src" v-bind:class="img_class">
-            <a v-bind:href="article_src"><h1>{{ title }}</h1></a>
-            <p>{{ text }}</p>
-        </div>-->
+    <?php
+        require('php/utils.php');
+        session_start();
+        if(isset($_SESSION["uid"])) {
+            
+        }
+    ?>
+    <div id="app">
+        <nav class="navbar is-fixed-top">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="index.html">
+                    Home
+                </a>
+                <a class="navbar-item" href="browse.html">
+                    Browse
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        {{ username }}
+                    </div>
+                </div>
+            </div>
+        </nav>
         <section class="section">
             <div class="container">
                 <div class="columns">
-                    <div class="column is-two-thirds">
+                    <div id="posts" class="column is-two-thirds">
+                        <h1>Main Feed</h1>
                         <div class="post-container">
                             <post-item v-for="post in posts" 
                                 v-bind:title="post.title" 
-                                v-bind:description="post.description" 
+                                v-bind:description="post.article_desc" 
                                 v-bind:img_src="post.img_src"
                                 v-bind:article_src="post.article_src"></post-item>
                         </div>
                         
                     </div>
-                    <div class="column is-one-third">
-
+                    <div id="projects" class="column is-one-third">
+                        <h1>Projects</h1>
+                        <ul>
+                            <li v-for="project in projects">{{ project.name }}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
