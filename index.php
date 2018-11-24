@@ -13,20 +13,13 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <?php
-        require('php/utils.php');
-        session_start();
-        if(isset($_SESSION["uid"])) {
-            
-        }
-    ?>
     <div id="app">
-        <nav class="navbar is-fixed-top">
+    <nav class="navbar is-fixed-top">
             <div class="navbar-brand">
-                <a class="navbar-item" href="index.html">
+                <a class="navbar-item" href="index.php">
                     Home
                 </a>
-                <a class="navbar-item" href="browse.html">
+                <a class="navbar-item" href="browse.php">
                     Browse
                 </a>
             </div>
@@ -35,13 +28,19 @@
                     <div class="navbar-item">
                         {{ username }}
                     </div>
+                    <a class="navbar-item" href="login.php">
+                        login
+                    </a>
+                    <a class="navbar-item" href="register.php">
+                        sign up
+                    </a>
                 </div>
             </div>
         </nav>
         <section class="section">
             <div class="container">
                 <div class="columns">
-                    <div id="posts" class="column is-two-thirds">
+                    <div id="posts" class="column is-three-quarters">
                         <h1>Main Feed</h1>
                         <div class="post-container">
                             <post-item v-for="post in posts" 
@@ -52,7 +51,7 @@
                         </div>
                         
                     </div>
-                    <div id="projects" class="column is-one-third">
+                    <div id="projects" class="column is-one-quarter">
                         <h1>Projects</h1>
                         <ul>
                             <li v-for="project in projects">{{ project.name }}</li>
@@ -61,8 +60,12 @@
                 </div>
             </div>
         </section>
-            
     </div>
+
     <script src="js/main.js"></script>
+
+    <?php
+        require('php/setup.php');
+    ?>
 </body>
 </html>

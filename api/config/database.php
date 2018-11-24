@@ -39,7 +39,7 @@ function select_posts_user($uid) {
 
     $query ='SELECT mschaefer_posts.pid, mschaefer_posts.article_date, mschaefer_posts.title, mschaefer_posts.article_desc, mschaefer_posts.img_src, mschaefer_posts.article_src, mschaefer_posts.likes 
         FROM `mschaefer_posts` INNER JOIN mschaefer_user_projects WHERE mschaefer_posts.pid=mschaefer_user_projects.pid 
-        AND mschaefer_user_projects.uuid=:userid;';
+        AND mschaefer_user_projects.uuid=:userid ORDER BY mschaefer_posts.article_date DESC;';
     $statement = $db->prepare($query);
     $statement->execute(array("userid"=>$uid));
     $results = $statement->fetchAll();
@@ -59,7 +59,7 @@ function insert_post($pid, $article_date, $title, $article_desc, $img_src, $arti
         print("Database error: " . $ex->getMessage());
     }
         return false;
-
 }
+
 
 ?>

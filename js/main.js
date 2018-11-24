@@ -41,6 +41,7 @@ var app = new Vue({
         projects: null,
         username: null,
         userid: null,
+        is_logged_in: null,
     },
     mounted() {
         axios
@@ -54,4 +55,15 @@ var app = new Vue({
             .get('http://localhost/final_proj/api/items/projects.php')
             .then(response => (this.projects = response.data.projects))
     },
+    watch: {
+        userid: function (val) {
+            axios
+            .get('http://localhost/final_proj/api/items/posts.php', {
+                params: {
+                    uid: this.userid
+                }
+            })
+            .then(response => (this.posts = response.data.posts))
+        }
+    }
   })
