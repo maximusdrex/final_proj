@@ -6,6 +6,13 @@ function json_response($output) {
     echo json_encode(array("projects" => $output));
 }
 
-json_response(select_query("*", "mschaefer_projects"));
+if(isset($_GET["pid"])) {
+    json_response(select_project($_GET["pid"]));
+} elseif (isset($_GET["uid"])) {
+    json_response(select_user_project($_GET["uid"]));
+} else {
+    json_response(select_query("*", "mschaefer_projects"));
+}
 
-?>  
+
+?>

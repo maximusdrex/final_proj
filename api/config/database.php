@@ -34,6 +34,46 @@ function select_query($columns, $from) {
         return false;
 }
 
+function select_project($pid) {
+    try {
+        $db = get_db();
+
+        $query = "SELECT * FROM `mschaefer_projects` WHERE pid=:projectid";
+
+        $statement = $db->prepare($query);
+        $statement->execute(array("projectid"=>$pid));
+        $results = $statement->fetchAll();
+        if(empty($results)) {
+            return false;
+        } else {
+            return $results[0];
+        }
+    } catch(PDOException $ex) {
+        print("Database error: " . $ex->getMessage());
+    }
+}
+
+function select_user_project($uid) {
+    try {
+        $db = get_db();
+
+        $query = "SELECT `mschaefer_projects`.pid, `mschaefer_projects`.name, `mschaefer_projects`.dev_id, `mschaefer_projects`.img, `mschaefer_projects`.description, `mschaefer_projects`.twitter 
+            FROM `mschaefer_projects` INNER JOIN `mschaefer_user_projects` ON `mschaefer_user_projects`.pid=`mschaefer_projects`.pid WHERE `mschaefer_user_projects`.uuid=:userid";
+
+        $statement = $db->prepare($query);
+        $statement->execute(array("userid"=>$uid));
+        $results = $statement->fetchAll();
+        if(empty($results)) {
+            return false;
+        } else {
+            return $results;
+        }
+    } catch(PDOException $ex) {
+        print("Database error: " . $ex->getMessage());
+    }
+}
+
+
 function select_posts_user($uid) {
     $db = get_db();
 
@@ -54,7 +94,7 @@ function insert_post($pid, $article_date, $title, $article_desc, $img_src, $arti
         /*$query = "SELECT * FROM mschaefer_posts";*/
         $statement = $db->prepare($query);
         $statement->execute(array("projectid"=>$pid, "art_date"=>$article_date, "art_title"=>$title, "art_desc"=>$article_desc, "art_img_src"=>$img_src, "art_src"=>$article_src));
-        console_log("insertion completed");
+        #console_log("insertion completed");
     } catch (PDOException $ex) {
         print("Database error: " . $ex->getMessage());
     }

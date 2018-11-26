@@ -42,6 +42,7 @@ var app = new Vue({
         username: null,
         userid: null,
         is_logged_in: null,
+        dropdown: false,
     },
     mounted() {
         axios
@@ -52,18 +53,61 @@ var app = new Vue({
             })
             .then(response => (this.posts = response.data.posts))
         axios
-            .get('http://localhost/final_proj/api/items/projects.php')
+            .get('http://localhost/final_proj/api/items/projects.php', {
+                params: {
+                    uid: this.userid
+                }
+            })
             .then(response => (this.projects = response.data.projects))
     },
     watch: {
         userid: function (val) {
             axios
-            .get('http://localhost/final_proj/api/items/posts.php', {
-                params: {
-                    uid: this.userid
-                }
-            })
-            .then(response => (this.posts = response.data.posts))
+                .get('http://localhost/final_proj/api/items/posts.php', {
+                    params: {
+                        uid: val
+                    }
+                })
+                .then(response => (this.posts = response.data.posts))
+            axios
+                .get('http://localhost/final_proj/api/items/projects.php', {
+                    params: {
+                        uid: this.userid
+                    }
+                })
+                .then(response => (this.projects = response.data.projects))
         }
+    },
+    methods: {
+        deleteProj: function(pid) {
+            console.log(pid)
+            console.log(this.userid)
+            axios
+                .get('http://localhost/final_proj/api/items/update.php', {
+                    params: {
+                        uid: this.userid,
+                        pid: pid,
+                        remove: true
+                    }
+                })
+            location.reload()
+        },
+        refreshData: function() {
+            axios
+                .get('http://localhost/final_proj/api/items/posts.php', {
+                    params: {
+                        uid: this.userid
+                    }
+                })
+                .then(response => (this.posts = response.data.posts))
+            axios
+                .get('http://localhost/final_proj/api/items/projects.php', {
+                    params: {
+                        uid: this.userid
+                    }
+                })
+                .then(response => (this.projects = response.data.projects))
+        },
     }
   })
+

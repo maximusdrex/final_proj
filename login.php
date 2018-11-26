@@ -90,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </section>
         <section class="section is-medium">
             <div class="container box">
-                <form id="user_form" method="POST" action="register.php">
+                <form id="user_form" method="POST" action="login.php">
                     <div class="field">
                         <label class="label">Username</label>
                         <div class="control">
