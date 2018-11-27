@@ -14,5 +14,4 @@ if(isset($_GET["pid"])) {
     json_response(select_query("*", "mschaefer_projects"));
 }
 
-
 ?>

@@ -4,5 +4,6 @@ var app = new Vue({
         username: null,
         userid: null,
         is_logged_in: null,
+        dropdown: false,
     }
 })

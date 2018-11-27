@@ -5,5 +5,6 @@ var app = new Vue({
         userid: null,
         is_logged_in: null,
         dropdown: false,
+        search: "",
     }
 })
