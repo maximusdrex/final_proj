@@ -16,7 +16,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar">
+    <nav class="navbar">
             <div class="navbar-brand">
                 <a class="navbar-item" href="index.php">
                     Home
@@ -27,6 +27,14 @@
             </div>
             <div class="navbar-menu">
                 <div class="navbar-end">
+                    <div class="navbar-item">
+                        <form id="search-form" method="GET" action="search.php">
+                            <div class="field has-addons">
+                                <input name="q" class="control input" type="text" placeholder="Search" />
+                                <button type="submit" form="search-form" class="button"><i class="fas fa-search"></i>
+                            </div>
+                        </form>
+                    </div>
                     <div v-if="is_logged_in"class="navbar-item">
                         <div v-bind:class="[{ 'is-active': dropdown }, 'dropdown']">
                             <div class="dropdown-trigger">
@@ -52,8 +60,7 @@
                     </a>
                 </div>
             </div>
-        </nav>
-        <section class="section">
+        </nav>        <section class="section">
             <div class="container">
                 <div class="columns">
                     <div id="posts" class="column is-three-quarters">
@@ -85,6 +92,7 @@
 
     <?php
         require('php/setup.php');
+        exec_script("app.refreshData()");
     ?>
 </body>
 </html>

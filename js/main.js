@@ -43,29 +43,19 @@ var app = new Vue({
         userid: null,
         is_logged_in: null,
         dropdown: false,
+        last_page: 1,
     },
     mounted() {
-        axios
-            .get('http://localhost/final_proj/api/items/posts.php', {
-                params: {
-                    uid: this.userid
-                }
-            })
-            .then(response => (this.posts = response.data.posts))
-        axios
-            .get('http://localhost/final_proj/api/items/projects.php', {
-                params: {
-                    uid: this.userid
-                }
-            })
-            .then(response => (this.projects = response.data.projects))
+        this.scroll()
     },
     watch: {
         userid: function (val) {
             axios
                 .get('http://localhost/final_proj/api/items/posts.php', {
                     params: {
-                        uid: val
+                        uid: this.userid,
+                        page: 1,
+                        pagesize: 12
                     }
                 })
                 .then(response => (this.posts = response.data.posts))
@@ -96,7 +86,9 @@ var app = new Vue({
             axios
                 .get('http://localhost/final_proj/api/items/posts.php', {
                     params: {
-                        uid: this.userid
+                        uid: this.userid,
+                        page: 1,
+                        pagesize: 12
                     }
                 })
                 .then(response => (this.posts = response.data.posts))
@@ -108,6 +100,30 @@ var app = new Vue({
                 })
                 .then(response => (this.projects = response.data.projects))
         },
+        scroll: function() {
+            window.onscroll = () => {
+                var bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+
+                if(bottomOfWindow) {
+                    axios
+                        .get('http://localhost/final_proj/api/items/posts.php', {
+                            params: {
+                                uid: this.userid,
+                                page: this.last_page + 1,
+                                pagesize: 12
+                            }
+                        })
+                        .then(response => (this.addPosts(response)))
+                        /*.then(response => (this.posts.concat(response.data.posts)))*/
+                    this.last_page += 1
+                }
+            }
+            
+        },
+        addPosts: function(response) {
+            /*console.log(response.data.posts)*/
+            this.posts = this.posts.concat(response.data.posts)
+        }
     }
   })
 

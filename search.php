@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css" />
@@ -26,6 +26,14 @@
             </div>
             <div class="navbar-menu">
                 <div class="navbar-end">
+                    <div class="navbar-item">
+                        <form id="search-form" method="GET" action="search.php">
+                            <div class="field has-addons">
+                                <input name="q" class="control input" type="text" placeholder="Search" />
+                                <button type="submit" form="search-form" class="button"><i class="fas fa-search"></i>
+                            </div>
+                        </form>
+                    </div>
                     <div v-if="is_logged_in"class="navbar-item">
                         <div v-bind:class="[{ 'is-active': dropdown }, 'dropdown']">
                             <div class="dropdown-trigger">
@@ -67,12 +75,23 @@
                 </div>
             </div>
         </section>
+        <section class="section" id="projects">
+            <div class="container">
+                <project v-for="project in filtered" v-bind:project="project"></project>
+            </div>
+        </section>
     </div>
     
     <script src="js/search.js"></script>
 
     <?php
         require('php/setup.php');
+
+        if($_SERVER["REQUEST_METHOD"] == "GET"){
+            if(isset($_GET["q"])) {
+                exec_script("app.search = '" . (string) $_GET["q"] . "'");
+            }
+        }
     ?>
 </body>
 </html>

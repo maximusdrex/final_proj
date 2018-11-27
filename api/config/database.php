@@ -86,6 +86,37 @@ function select_posts_user($uid) {
     return $results;
 }
 
+function select_posts_user_paged($uid, $page, $page_size) {
+    $db = get_db();
+
+    $query ='SELECT bottom_10.pid, bottom_10.article_date, bottom_10.title, bottom_10.article_desc, bottom_10.article_src, bottom_10.img_src, bottom_10.likes FROM (SELECT * FROM 
+	(SELECT mschaefer_posts.pid, mschaefer_posts.article_date, mschaefer_posts.title, mschaefer_posts.article_desc, mschaefer_posts.img_src, mschaefer_posts.article_src, mschaefer_posts.likes FROM `mschaefer_posts` INNER JOIN mschaefer_user_projects WHERE mschaefer_posts.pid=mschaefer_user_projects.pid AND mschaefer_user_projects.uuid=:userid ORDER BY mschaefer_posts.article_date DESC LIMIT :pagelim) AS topx
+    ORDER BY topx.article_date ASC LIMIT :pagesize) AS bottom_10
+    ORDER BY bottom_10.article_date DESC';
+    $pagelim = $page * $page_size;
+    $statement = $db->prepare($query);
+    $statement->bindParam(':userid', $uid);
+    $statement->bindParam(':pagelim', $pagelim, PDO::PARAM_INT);
+    $statement->bindParam(':pagesize', $page_size, PDO::PARAM_INT);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    return $results;
+}
+
+
+
+function user_posts_count($uid) {
+    $db = get_db();
+
+    $query ='SELECT COUNT(*) 
+        FROM `mschaefer_posts` INNER JOIN mschaefer_user_projects WHERE mschaefer_posts.pid=mschaefer_user_projects.pid 
+        AND mschaefer_user_projects.uuid=:userid ORDER BY mschaefer_posts.article_date DESC;';
+    $statement = $db->prepare($query);
+    $statement->execute(array("userid"=>$uid));
+    $results = $statement->fetchAll();
+    return $results[0][0];
+}
+
 function insert_post($pid, $article_date, $title, $article_desc, $img_src, $article_src) {
     try {
         $db = get_db();
@@ -100,6 +131,5 @@ function insert_post($pid, $article_date, $title, $article_desc, $img_src, $arti
     }
         return false;
 }
-
 
 ?>
