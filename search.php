@@ -13,9 +13,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
+
 <body>
     <div id="app">
-        <nav class="navbar">
+    <nav class="navbar">
             <div class="navbar-brand">
                 <a class="navbar-item" href="index.php">
                     Home
@@ -26,6 +27,9 @@
             </div>
             <div class="navbar-menu">
                 <div class="navbar-end">
+                    <a v-if="is_logged_in" class="navbar-item" href="add.php">
+                        <i class="fas fa-plus"></i>
+                    </a>
                     <div class="navbar-item">
                         <form id="search-form" method="GET" action="search.php">
                             <div class="field has-addons">
@@ -59,7 +63,7 @@
                     </a>
                 </div>
             </div>
-        </nav>
+        </nav> 
         <section class="section" id="search-section">
             <div class="container">
                 <div class="level">

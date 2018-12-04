@@ -16,7 +16,7 @@
 
 <body>
     <div id="app">
-    <nav class="navbar">
+        <nav class="navbar">
             <div class="navbar-brand">
                 <a class="navbar-item" href="index.php">
                     Home
@@ -27,6 +27,9 @@
             </div>
             <div class="navbar-menu">
                 <div class="navbar-end">
+                    <a v-if="is_logged_in" class="navbar-item" href="add.php">
+                        <i class="fas fa-plus"></i>
+                    </a>
                     <div class="navbar-item">
                         <form id="search-form" method="GET" action="search.php">
                             <div class="field has-addons">
@@ -60,10 +63,11 @@
                     </a>
                 </div>
             </div>
-        </nav>        <section class="section">
+        </nav>        
+        <section class="section">
             <div class="container">
                 <div class="columns">
-                    <div id="posts" class="column is-three-quarters">
+                    <div v-if="is_logged_in" id="posts" class="column is-three-quarters">
                         <h1>Main Feed</h1>
                         <div class="post-container">
                             <post-item v-for="post in posts" 
@@ -72,6 +76,11 @@
                                 v-bind:img_src="post.img_src"
                                 v-bind:article_src="post.article_src"></post-item>
                         </div>
+                        
+                    </div>
+                    <div v-if="!is_logged_in" id="posts" class="column is-three-quarters">
+                        <h1>Log</h1>
+                        
                         
                     </div>
                     <div id="projects" class="column is-one-quarter">

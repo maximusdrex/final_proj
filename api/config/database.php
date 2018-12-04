@@ -127,9 +127,35 @@ function insert_post($pid, $article_date, $title, $article_desc, $img_src, $arti
         $statement->execute(array("projectid"=>$pid, "art_date"=>$article_date, "art_title"=>$title, "art_desc"=>$article_desc, "art_img_src"=>$img_src, "art_src"=>$article_src));
         #console_log("insertion completed");
     } catch (PDOException $ex) {
-        print("Database error: " . $ex->getMessage());
+
     }
-        return false;
+    return false;
+}
+
+function insert_project($proj_name, $proj_img, $desc, $twitter) {
+    try {
+        $db = get_db();
+
+        $query = "INSERT INTO `mschaefer_projects`(`name`, `img`, `description`, `twitter`) VALUES (:projname, :projimg, :projdesc, :projtwitter)";
+        $statement = $db->prepare($query);
+        $statement->execute(array("projname"=>$proj_name, "projimg"=>$proj_img, "projdesc"=>$desc, "projtwitter"=>$twitter));
+    } catch(PDOException $ex) {
+        console_log("Database error: " . $ex->getMessage());
+    }
+}
+
+function get_featured() {
+    try {
+        $db = get_db();
+
+        $query = "SELECT `mschaefer_projects`.`pid`, `mschaefer_projects`.`name`, `mschaefer_projects`.`dev_id`, `mschaefer_projects`.`img`, `mschaefer_projects`.`description`, `mschaefer_projects`.`twitter` FROM `mschaefer_featured` INNER JOIN `mschaefer_projects` ON `mschaefer_featured`.`pid`=`mschaefer_projects`.`pid`";
+        $statement = $db->prepare($query);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results[0];
+    } catch(PDOException $ex) {
+        console_log("DB err");
+    }
 }
 
 ?>

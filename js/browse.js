@@ -26,10 +26,14 @@ var app = new Vue({
         userid: null,
         is_logged_in: null,
         dropdown: false,
+        featured: null,
     },
     mounted() {
         axios
             .get('http://localhost/final_proj/api/items/projects.php')
             .then(response => (this.projects = response.data.projects))
+            axios
+            .get('http://localhost/final_proj/api/items/featured/projects.php')
+            .then(response => (this.featured = response.data.featured))
     },
 })

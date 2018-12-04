@@ -13,46 +13,57 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
-
 <body>
 <div id="app">
-    <nav class="navbar">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="index.php">
-                Home
-            </a>
-            <a class="navbar-item" href="browse.php">
-                Browse
-            </a>
-        </div>
-        <div class="navbar-menu">
-            <div class="navbar-end">
-                <div v-if="is_logged_in"class="navbar-item">
-                    <div v-bind:class="[{ 'is-active': dropdown }, 'dropdown']">
-                        <div class="dropdown-trigger">
-                            <button class="button" onclick="app.dropdown = !app.dropdown">
-                            <span>{{ username }}</span>
-                            <span class="icon is-small">
-                                <i class="fas fa-angle-down" aria-hidden="true"></i>
-                            </span>
-                            </button>
-                        </div>
-                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                            <div class="dropdown-content">
-                                <a href="logout.php" class="dropdown-item">Log Out</a>
+<nav class="navbar">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="index.php">
+                    Home
+                </a>
+                <a class="navbar-item" href="browse.php">
+                    Browse
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <a v-if="is_logged_in" class="navbar-item" href="add.php">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                    <div class="navbar-item">
+                        <form id="search-form" method="GET" action="search.php">
+                            <div class="field has-addons">
+                                <input name="q" class="control input" type="text" placeholder="Search" />
+                                <button type="submit" form="search-form" class="button"><i class="fas fa-search"></i>
+                            </div>
+                        </form>
+                    </div>
+                    <div v-if="is_logged_in"class="navbar-item">
+                        <div v-bind:class="[{ 'is-active': dropdown }, 'dropdown']">
+                            <div class="dropdown-trigger">
+                                <button class="button" onclick="app.dropdown = !app.dropdown">
+                                <span>{{ username }}</span>
+                                <span class="icon is-small">
+                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                </span>
+                                </button>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                <div class="dropdown-content">
+                                    <a href="logout.php" class="dropdown-item">Log Out</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <a v-if="!is_logged_in" class="navbar-item" href="login.php">
+                        login
+                    </a>
+                    <a v-if="!is_logged_in" class="navbar-item" href="register.php">
+                        sign up
+                    </a>
                 </div>
-                <a v-if="!is_logged_in" class="navbar-item" href="login.php">
-                    login
-                </a>
-                <a v-if="!is_logged_in" class="navbar-item" href="register.php">
-                    sign up
-                </a>
             </div>
-        </div>
-    </nav>
+        </nav> 
+
     <section class="section">
         <div id="project-header" class="hero is-medium project-bg" v-bind:style="{ 'background-image': 'url(' + projectImg + ')' }">
             <div class="hero-body project-title">
