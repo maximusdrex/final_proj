@@ -16,7 +16,7 @@ var app = new Vue({
         pid: function(val) {
             if(val != null) {
                 axios
-                    .get('http://localhost/final_proj/api/items/projects.php', {
+                    .get('http://www.1819.lakeside-cs.org/Schaefer/final_proj/api/items/projects.php', {
                         params: {
                             pid: val
                         }
@@ -28,7 +28,7 @@ var app = new Vue({
     methods: {
         addProject: function(event) {
             axios
-                .get('http://localhost/final_proj/api/items/update.php', {
+                .get('http://www.1819.lakeside-cs.org/Schaefer/final_proj/api/items/update.php', {
                     params: {
                         add: true,
                         uid: this.userid,

@@ -88,7 +88,7 @@
                         <ul>
                             <li v-for="project in projects" class="container content" :key="project.pid">
                                 <button class="button" v-on:click="deleteProj(project.pid)"><i class="far fa-times-circle"></i></button>
-                                <a v-bind:href="'http://localhost/final_proj/project.php?pid=' + project.pid">{{ project.name }}<a>
+                                <a v-bind:href="'http://www.1819.lakeside-cs.org/Schaefer/final_proj/project.php?pid=' + project.pid">{{ project.name }}<a>
                             </li>
                         </ul>
                     </div>

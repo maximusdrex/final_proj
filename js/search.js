@@ -3,13 +3,13 @@ Vue.component('project', {
     template: `
     <article class="media">
         <figure class="media-left">
-            <a v-bind:href="'http://localhost/final_proj/project.php?pid=' + project.pid"><p class="image is-64x64">
+            <a v-bind:href="'http://www.1819.lakeside-cs.org/Schaefer/final_proj/project.php?pid=' + project.pid"><p class="image is-64x64">
                 <img v-bind:src="project.img">
             </p></a>
         </figure>
         <div class="media-content">
             <p>
-                <a v-bind:href="'http://localhost/final_proj/project.php?pid=' + project.pid"><strong>{{ project.name }}</strong></a> 
+                <a v-bind:href="'http://www.1819.lakeside-cs.org/Schaefer/final_proj/project.php?pid=' + project.pid"><strong>{{ project.name }}</strong></a> 
                 <br />
                 {{ project.description }}
             </p>
@@ -30,7 +30,7 @@ var app = new Vue({
     },
     mounted() {
         axios
-            .get('http://localhost/final_proj/api/items/projects.php')
+            .get('http://www.1819.lakeside-cs.org/Schaefer/final_proj/api/items/projects.php')
             .then(response => (this.projects = response.data.projects))
     },
     computed: {

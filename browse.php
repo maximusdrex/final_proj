@@ -67,7 +67,7 @@
             <div id="project-header" class="hero is-large project-bg" v-bind:style="{ 'background-image': 'url(' + featured.img + ')' }">
                 <div class="hero-body project-title">
                     <h1  class="title ">
-                        <a v-bind:href="'http://localhost/final_proj/project.php?pid=' + featured.pid">Featured Project: {{ featured.name }}</a>
+                        <a v-bind:href="'http://www.1819.lakeside-cs.org/Schaefer/final_proj/project.php?pid=' + featured.pid">Featured Project: {{ featured.name }}</a>
                     </h1>
                 </div>
             </div>

@@ -51,7 +51,7 @@ var app = new Vue({
     watch: {
         userid: function (val) {
             axios
-                .get('http://localhost/final_proj/api/items/posts.php', {
+                .get('http://www.1819.lakeside-cs.org/Schaefer/final_proj/api/items/posts.php', {
                     params: {
                         uid: this.userid,
                         page: 1,
@@ -60,7 +60,7 @@ var app = new Vue({
                 })
                 .then(response => (this.posts = response.data.posts))
             axios
-                .get('http://localhost/final_proj/api/items/projects.php', {
+                .get('http://www.1819.lakeside-cs.org/Schaefer/final_proj/api/items/projects.php', {
                     params: {
                         uid: this.userid
                     }
@@ -73,7 +73,7 @@ var app = new Vue({
             console.log(pid)
             console.log(this.userid)
             axios
-                .get('http://localhost/final_proj/api/items/update.php', {
+                .get('http://www.1819.lakeside-cs.org/Schaefer/final_proj/api/items/update.php', {
                     params: {
                         uid: this.userid,
                         pid: pid,
@@ -84,7 +84,7 @@ var app = new Vue({
         },
         refreshData: function() {
             axios
-                .get('http://localhost/final_proj/api/items/posts.php', {
+                .get('http://www.1819.lakeside-cs.org/Schaefer/final_proj/api/items/posts.php', {
                     params: {
                         uid: this.userid,
                         page: 1,
@@ -93,7 +93,7 @@ var app = new Vue({
                 })
                 .then(response => (this.posts = response.data.posts))
             axios
-                .get('http://localhost/final_proj/api/items/projects.php', {
+                .get('http://www.1819.lakeside-cs.org/Schaefer/final_proj/api/items/projects.php', {
                     params: {
                         uid: this.userid
                     }
@@ -106,7 +106,7 @@ var app = new Vue({
 
                 if(bottomOfWindow) {
                     axios
-                        .get('http://localhost/final_proj/api/items/posts.php', {
+                        .get('http://www.1819.lakeside-cs.org/Schaefer/final_proj/api/items/posts.php', {
                             params: {
                                 uid: this.userid,
                                 page: this.last_page + 1,
