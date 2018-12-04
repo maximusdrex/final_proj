@@ -1,6 +1,9 @@
 <?php
     require_once('utils.php');
-    session_start();
+    if(!isset($_SESSION["uid"])) {
+        session_start();
+    }
+
     if(isset($_SESSION["uid"])) {
         exec_script("app.userid = {$_SESSION["uid"]}");
         exec_script("app.username = \"{$_SESSION["username"]}\"");

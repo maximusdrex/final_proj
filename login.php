@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $_SESSION["uid"] = $uuid;
             $_SESSION["username"] = $username;
 
-            header("location: index.php");
+            echo "<script> window.location = \"index.php\" </script>";
         }
     }
 }
