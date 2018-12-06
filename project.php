@@ -90,6 +90,11 @@
           </div>
         </div>
     </section>
+    <footer class="footer">
+        <div class="container">
+            <button v-on:click="deleteProject" class="button is-danger">Delete Project</button>
+        </div>
+    </footer>
 </div>
 
 <script src="js/project.js"></script>

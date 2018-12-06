@@ -36,6 +36,18 @@ var app = new Vue({
                     }
                 })
                 .then(console.log("success"))
+        },
+        deleteProject: function(event) {
+            if(confirm("Are you sure you want to delete this project? This deletes it for ALL users")) {
+                axios
+                    .get('http://www.1819.lakeside-cs.org/Schaefer/final_proj/api/items/update.php', {
+                        params: {
+                            delete: true,
+                            pid: this.pid,
+                        }
+                    })
+                    .then(console.log("success"))
+            }
         }
     }
 })
