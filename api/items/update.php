@@ -35,6 +35,10 @@ if($_SERVER["REQUEST_METHOD"] == "GET") {
             $query = "DELETE FROM `mschaefer_user_projects` WHERE pid=:projectid";
             $statement = $db->prepare($query);
             $statement->execute(array("projectid" => $_GET["pid"]));
+
+            $query = "DELETE FROM `mschaefer_projects` WHERE pid=:projectid";
+            $statement = $db->prepare($query);
+            $statement->execute(array("projectid" => $_GET["pid"]));
         }
     }
 }
