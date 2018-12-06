@@ -4,7 +4,7 @@ require_once("../config/database.php");
 function already_added($pid, $uid) {
     $db = get_db();
 
-    $query = "SELECT COUNT(*) `mschaefer_user_projects` WHERE uuid=:userid AND pid=:projectid";
+    $query = "SELECT COUNT(*) FROM `mschaefer_user_projects` WHERE uuid=:userid AND pid=:projectid";
     $statement = $db->prepare($query);
     $statement->execute(array("userid" => $uid, "projectid" => $pid));    
     $results = $statement->fetchAll();
