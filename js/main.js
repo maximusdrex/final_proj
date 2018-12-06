@@ -99,6 +99,7 @@ var app = new Vue({
                     }
                 })
                 .then(response => (this.projects = response.data.projects))
+            axios.get('http://www.1819.lakeside-cs.org/Schaefer/final_proj/api/refresh.php')
         },
         scroll: function() {
             window.onscroll = () => {

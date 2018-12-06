@@ -83,6 +83,7 @@
                     </div>
                     <div id="projects" class="column is-one-quarter">
                         <h1>Projects</h1>
+                        <h1 v-if="projects.length < 1"><a href="browse.php">Browse</a> for some projects</h1>
                         <ul>
                             <li v-for="project in projects" class="container content" :key="project.pid">
                                 <button class="button" v-on:click="deleteProj(project.pid)"><i class="far fa-times-circle"></i></button>
