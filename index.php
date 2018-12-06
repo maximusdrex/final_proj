@@ -7,9 +7,11 @@
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+    <!-- Bulma.io is a CSS Framework for most of my layout, fontawesome is just for icons -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
+    <!-- Vue.js is a JS framework, Axios is a js library to do GET and POST requests to REST APIs - my own in this case-->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
@@ -64,11 +66,12 @@
                 </div>
             </div>
         </nav>        
-        <section class="section">
+        <section class="section has-background-light">
             <div class="container">
                 <div class="columns">
-                    <div v-if="is_logged_in" id="posts" class="column is-three-quarters">
+                    <div id="posts" class="column is-three-quarters">
                         <h1>Main Feed</h1>
+                        <div v-if="!is_logged_in"><h1>Please <a href="login.php">Log In</a> or <a href="register.php">create an account</a> to use the website</h1></div>
                         <div class="post-container">
                             <post-item v-for="post in posts" 
                                 v-bind:title="post.title" 
@@ -76,11 +79,6 @@
                                 v-bind:img_src="post.img_src"
                                 v-bind:article_src="post.article_src"></post-item>
                         </div>
-                        
-                    </div>
-                    <div v-if="!is_logged_in" id="posts" class="column is-three-quarters">
-                        <h1>Log</h1>
-                        
                         
                     </div>
                     <div id="projects" class="column is-one-quarter">

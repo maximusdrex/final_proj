@@ -38,6 +38,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             } else {
                 console_log("err");
             }
+        } else {
+            $failed = true;
         }
     }
 }
@@ -122,8 +124,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="field">
                         <label class="label">Username</label>
                         <div class="control">
-                            <input class="input" placeholder="username" id="username" name="username" type="text"/>
+                            <input v-bind:class="failed ? 'is-danger' : ''" class="input" placeholder="username" id="username" name="username" type="text"/>
                         </div>
+                        <p v-if="failed" class="help is-danger">Username is taken</p>
                     </div>
                     <div class="field">
                         <label class="label">Password</label>
@@ -146,6 +149,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     <?php
         require('php/setup.php');
+        if($failed) {
+            exec_script("app.failed = true");
+        }
     ?>    
 </body>
 </html>
