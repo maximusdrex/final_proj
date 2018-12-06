@@ -46,7 +46,7 @@ var app = new Vue({
                             pid: this.pid,
                         }
                     })
-                    .then(console.log("success"))
+                    .then(window.location = "index.php")
             }
         }
     }
