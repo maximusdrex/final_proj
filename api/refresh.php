@@ -27,7 +27,7 @@ function project_refresh($project_keyword, $pid) {
     for ($i=0; $i < count($articles); $i++) { 
         $current_article = (array) $articles[$i];
         $current_date = substr($current_article["publishedAt"], 0, 10);
-        if (! is_in_db($current_article["title"], $current_date)) {
+        if ((! is_in_db($current_article["title"], $current_date)) && (strpos($current_article["title"], $project_keyword) !== false)) {
             insert_post($pid, $current_date, $current_article["title"], $current_article["description"], $current_article["urlToImage"], $current_article["url"]);
         } else {
 
