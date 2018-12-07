@@ -75,18 +75,13 @@
         </div>
         <br />
         <div class="columns">
-          <div class="column is-two-thirds">
+          <div>
             <h2 class="subtitle">
                 Details
             </h2>
             <p v-if="project != null" class="content">
                 {{ project.description }}
             </p>
-          </div>
-          <div class="column is-one-third">
-            <h2 class="subtitle">
-                Similar
-            </h2>
           </div>
         </div>
     </section>
